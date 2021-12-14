@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{psfrag}   
-\usepackage{cite}
+%\usepackage{cite}
 \def\citepunct{], [}
 \def\citedash{]--[}
 
@@ -28,6 +28,10 @@
 
 \usepackage[labelfont = it, font = footnotesize, hangindent = 26pt, parskip = 20pt]{subfig}
 \usepackage{enumerate}
+
+\usepackage[backend=biber, style=science]{biblatex}
+\usepackage{csquotes}
+\addbibresource{final_bibliography.bib}
 
 \setlength{\oddsidemargin}{0.746cm}
 \setlength{\evensidemargin}{-0.1in}
@@ -91,8 +95,9 @@
 
 \cleardoublepage %to make sure that the first page number for the references is correctly listed in the TOC.
 \addcontentsline{toc}{chapter}{References}
-\bibliographystyle{IEEEtran}
-\bibliography{IEEEfull,Mybibliography}
+%\bibliographystyle{IEEEtran}
+\printbibliography
+%\bibliography{IEEEfull, final_bibliography}
 
 
 \noappendicestocpagenum
