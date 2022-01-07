@@ -127,3 +127,71 @@ The first one is  \ac{ASR}, available in the open-source MEEGkit\footnote{https:
 
 The \ac{QIRem} method takes the \ac{QC} labels and redistribute them on a simpler scale from 0 to 1, where 0 corresponds to LOW-Q, 0.5 corresponds to MED-MUSC-Q and MED-Q and 1 corresponds to HIGH-Q, and then for each 5 seconds time window it calculates an average of the \ac{QC} labels.
 
+\begin{figure}[h!]
+\includegraphics[width=15cm]{img/methods/qirem_example.png}
+\centering
+\caption{Example of how QIRem flags bad segments flagged for removal.} \label{fig_qirem_example}
+\end{figure}
+
+If the average is below a specified “threshold” parameter, the EEG split is removed from the dataset (Fig. \ref{fig_qirem_example}). After removing all the contaminated splits if the dataset has lost more the percentage of data than the amount specified by the \emph{allowed loss} parameter, the entire participant’s dataset is flagged for exclusion from the analysis. During the tuning of the \ac{AuPP}, it was finally decided to avoid using \ac{ASR} to clean the signal, because it requires to be trained on a clean segment of signal and most often resulted in very aggressive cleaning that would flatten the signal (Fig. \ref{fig_asr_example}).
+
+\begin{figure}[h!]
+\includegraphics[width=15cm]{img/methods/asr_example.png}
+\centering
+\caption{Examples of the effects of ASR on the signal.} \label{fig_asr_example}
+\end{figure}
+
+The \ac{QIRem} method was setup with “threshold” set to 0.5 and allowed loss set to 0.25, meaning that the average quality of each time window had to be equal or above 0.5 in the simplified scale and that at most 25\% of data could be pruned before flagging the entire dataset for exclusion. With the current configuration, 10 participants were excluded from further analysis, hence why the threshold was kept around medium quality (0.5), allowing some artefacts to persist in the data. This approach is a compromise choice that carries three main problems that must be addressed in future studies:
+\begin{itemize}
+\item 	Very aggressive: bad quality data are not cleaned, but removed instead, possibly losing meaningful information and control over the distribution of the class labels.
+\item 	Exclusive: 10 out of 39 participants were excluded from analysis, which summed up to those excluded for other reasons is more than 1/3 of the entire experimental dataset.
+\item 	Not Optimized: one limitation of the Quality Checker algorithm is that it was trained for the consumer use on Melomind with electrodes placed on the parietal area of the scalp, so while able to discriminate good and bad quality segments of signal, it has no specific label for ocular artifacts. An upgraded version is under the work to provide classification of these artifacts.
+\end{itemize}
+
+\subsection{Features Computation}
+\label{sec:features_computation}
+To compute the spectral features, the \ac{PSD} of each 5 seconds window of the \ac{EEG} signal was extracted and filtered for theta, alpha and beta frequency band using the Signal Processing Toolbox wrapper for the \ac{FFT}. Before computing features, the time-frequency power was normalized using the decibel conversion method as described by M. X. Cohen \cite{cohen_analyzing_2014}. Time-frequency power follows a 1/f shape function, meaning that frequency spectrum tends to show decreasing power at increasing frequencies, \ac{EEG} included. Consequently, there are 5 main limitations:
+
+\begin{enumerate}
+\item 	Difficulty in visualizing power across a large range of frequency bands
+\item 	Difficulty in making power comparisons across such bands. Raw power values change in scale as a function of frequency, meaning that lower frequencies (Delta, Theta) will show larger effect than higher frequencies in terms of overall magnitude.
+\item 	Aggregation of subject-independent effects will not yield good results because of differences influenced by skill thickness, sulcal anatomy, cortical surface, recording environment or other internal and external factors.
+\item 	Task-related changes in power can be tainted by background activity, particularly for frequencies that tend to have higher power, especially during baseline periods (Alpha)
+\item 	Raw powers do not follow a normal distribution because they cannot be negative, and they are strongly positively distorted.
+\end{enumerate}
+Using decibel conversion, the ratio between strength of one signal (frequency-band-specific-power) and the strength of another signal (a baseline level of power in the same frequency band).
+\[dB_{tf} = 10log10 \left(\frac{activity_{tf}}{\overline{baseline_{tf}}} \right)\]
+The scale and interpretation of frequency-band-specific power becomes the change in power relative to the baseline. Any frequency-band-specific activity constant over time will be removed, including background activity. As a baseline for normalization, the resting state in the \ac{EC} condition was used, to prevent ocular artifacts from contaminating the trials. The baseline resting state, previously divided in 5 seconds time window, and pre-processed together with the other trials, was pruned from low quality segments using the \ac{QIRem} function and then averaged across all the time windows, for each channel. The main advantages obtainable by normalizing the date are the following: 
+
+\begin{itemize}
+\item 	All power data are re-scaled to the same scale and thus can be compared visually and statistically
+\item 	Normalization computed in respect to a pre-trial baseline enables to disentangle time-frequency dynamics from background or task-unrelated dynamics
+\item 	All power results are in a common and easily numerically interpretable metrics
+\item 	Parametric statistical analysis is appropriated to use (for baseline-normalized power data normally distributed) and quantitative group-level analyses and integration with other data (behavioral performance, questionnaires) is facilitated. 
+\end{itemize}
+For each 5s time window the following measurements were computed and stored for a total of 40 features among the two channels to be used in classification:
+\begin{enumerate}
+\item 	Normalized power in theta, alpha and beta frequency bands
+\item 	Approach-Withdrawal Index 
+\item 	Frontal-Midline Theta Index
+\item 	Spectral Asymmetry Indexes
+\item 	Skewness of the power in theta, alpha and beta frequency bands
+\item 	Kurtosis of the power in theta, alpha and beta frequency bands
+\item     Standard deviation of the power in theta, alpha and beta frequency bands
+\item 	Ratio of the power in theta, alpha and beta frequency bands
+\item 	Relative spectral difference of the power in theta, alpha and beta frequency bands
+\end{enumerate}
+
+These features include the neuromarkers described in Chapter \ref{chap:background} and additional properties of the power spectrum that could strengthen the models’ ability to discriminate emotional dimensions. 
+
+\begin{figure}[h!]
+\includegraphics[width=15cm]{img/methods/example_avg_annotations.png}
+\centering
+\caption{Example of annotations of a single participant for all trials. The labels are color coded according to the pre-labelled VA class of each song.} \label{fig_avg_annotations}
+\end{figure}
+
+Finally, the raw VA annotations (Fig. \ref{fig_avg_annotations}) were averaged for each time-window and then converted into positive labels whether the average was positive, or negative labels otherwise. Consequentially, each time window was labelled twice: first as HA or LA (High/Low Arousal), and then as HV or LV (High/Low Valence). The union of the two labels generates one of the class labels of the Valence-Arousal quadrant that represent the emotion elicited in that specific time window, according to the notation proposed by Koelstra et al. \cite{koelstra_deap_2012} (see Chapter \ref{sec:stimuli}). In some studies, the notation for valence is defined as PV and NV (Positive/Negative Valence), which is better aligned with the etymology of positive and negative emotions. The labels were also copied for each song from the \ac{EO} listening condition to the respective \ac{EC} listening condition.
+
+\subsection{Classification}
+\label{sec:classification}
+The classification pipeline was implemented using the open-source Python library Scikit-Learn\footnote{https://scikit-learn.org/stable/index.html}. Multiple experiments were conducted with two supervised learning models, Support-Vector Machine and Multilayer Perceptron. These models are a popular choice for the Emotion-Recognition task thanks to their relative simplicity yet their superior capacity to handle not linearly separable data compared to statistical linear models (see Chapter \ref{sec:classification_emotions}). The SVM architecture was defined using RBF kernel, that usually grants better accuracy, and it is relatively easy to calibrate, and decision function one-vs-one for binary classification and one-vs-rest for multi-class classification. The architecture for MLP was based on the LBFGS optimizer, a quasi-Newtonian method, that is more suitable for small datasets and can converge faster and perform better and ReLU was chosen over TanH as activation function because it reduces the impact of vanishing gradients, even if no substantial difference was observed while testing both. The problem has been set as a separate binary classification of Arousal and Valence using a subject-dependent strategy, similarly to most related studies. As explained in the Section 4.2.5, during the intermediate experiments the listening condition did not reveal significant differences in the classification performances, therefore all the trials of each subject were unified under a third condition named “EO\&EC” to take advantage of the greater amount of datapoints. Then, from each subject dataset, a total of 40 previously computed features were loaded in the classification pipeline. PCA was used to identify the features contributing for the 95\% of the variability of the dataset and projecting them on a lower dimensional space, thus reducing the dimensionality to ~12 components and greatly reducing the overall computation time, often referred to as curse of dimensionality. After applying PCA, the data were split into a training dataset and a test dataset in 80:20 proportion. The training dataset was used to tune the best hyper-parameters each classifier, respectively C and Gamma for SVM and Alpha and Hidden Layer Sizes for MLP, using GridSearch with a K-Fold Cross-Validation strategy, k=5. Finally, the tuned classifiers were trained with K-Fold Cross Validation leaving-one-block-out (LOBO) for testing, and the relevant score metrics were collected.
