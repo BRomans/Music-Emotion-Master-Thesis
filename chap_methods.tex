@@ -254,14 +254,14 @@ The \ac{MCC} value ranges between -1 and +1, where +1 represents a perfect predi
 \caption{Scheme of data splitting strategy for cross-validated GridSearch optimization.} \label{fig_scheme_data_splitting}
 \end{figure}
 
-In addition, \ac{SVM} models were also initialized with the weights of each class based on the distribution of the labels. Currently there is a known limitation in the Scikit-learn library, as it does not seem to support custom loss functions to optimize scoring parameters other than accuracy, a missing feature reported by users of the library \cite{martin_stacked_nodate, noauthor_please_nodate}. Consequently, when feeding \ac{MCC} as scoring parameter, it only means that after optimizing accuracy for all possible configurations, the configuration with highest \ac{MCC} is selected. Two scoring strategies for GridSearch were tested in the experiment:
+In addition, \ac{SVM} models were also initialized with the weights of each class based on the distribution of the labels. Currently there is a known limitation in the Scikit-learn library, as it does not seem to support custom loss functions to optimize scoring parameters other than accuracy, a missing feature reported by users of the library \cite{martin_stacked_nodate, noauthor_please_nodate}. Consequently, when feeding \ac{MCC} as scoring parameter, it only means that after optimizing accuracy for all possible configurations, the configuration with highest \ac{MCC} is selected. Two scoring strategies for GridSearch were tested in the intermediate experiments:
 \begin{itemize}
 \item 	Maximization of \ac{MCC} score, defined as “Max MCC” strategy
 \item 	Maximization of Accuracy score, defined as “Max Accuracy” strategy
 \end{itemize}
-The results of the two scoring strategies are compared in the next section.
+Maximising accuracy scores is often desirable in machine learning because it gives a clear idea of a model's ability to predict a class. A "good" accuracy in most cases should be above 90\%, while for an optimal score should be above 99\%. However, given the presence of many unbalanced datasets in the current research, the "Max Accuracy" strategy for GridSearch generated more often over-fitted models that would have higher accuracy, at the cost of never predicting the minority class, especially with \ac{SVM} classifiers (see Appendix \ref{sec:appendix_A3.5}). With \ac{MLP} classifiers this phenomenon was less evident, also because they already produced a larger number of over-fitted and under-fitted models than their \ac{SVM} counterparts, however in spite of using the same strategy and \ac{MCC} as principal metric to show evidences of learning capabilities, the "Max MCC" strategy was chosen to proceed with the final experiment.
 
-
+\iffalse
 \section{Better learning or better accuracy}
 \label{sec:better_learning_accuracy}
 The purpose of this intermediate experiment was to compare the scoring strategies; however, it is important to underline that the loss function implemented in the scikit-learn library for GridSearch is chosen to optimize accuracy and only then the scoring parameter is used to select the best configuration. The results of subject-dependent arousal classifications are reported in Table 3, and they are not significantly different from the previous experiment. However, the highest consistent accuracy score using \ac{MLP} is 77\% with \ac{MCC} score of 0.53. Furthermore, it is possible to notice an increased number of negative \ac{MCC} and \ac{CV MCC} scores, and for \ac{MLP} the best performing models are not entirely consistent with the previous experiment.
@@ -297,4 +297,4 @@ For arousal classification the difference between Max MCC strategy is evident an
 \end{figure}
 
 The current research is more focused on obtaining more interpretable and valid results from the classification of emotional valence and arousal rather than blindly maximizing the accuracy scores of the classifiers. The “Max Accuracy” strategy is less benevolent towards a general approach and generates more over-fitted or under-fitted models than “Max MCC” strategy, therefore results obtained using the latter strategy are considered the final ones and compared with the related work in the following section.
-
+\fi
