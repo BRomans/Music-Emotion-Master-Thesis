@@ -30,8 +30,9 @@ A pilot study was run internally with myBrainTechnologies employee to design the
 \section{Methods}
 \label{sec:appendix_A2}
 
-\subsection{Participants info-graphic}
+\subsection{Participants infographic}
 \label{sec:appendix_A2.1}
+
 \begin{figure}[!htb]
 \includegraphics[width=14cm]{img/appendix/age_distribution.png}
 \centering
@@ -46,6 +47,7 @@ A pilot study was run internally with myBrainTechnologies employee to design the
 
 \subsection{Emotion-Music playlist}
 \label{sec:appendix_A2.2}
+
 High Arousal / High Valence (HAHV)
 \begin{itemize}
 \item  (High arousal, medium positive valence) Excitement- Weapon of choice by Fatboy Slim
@@ -91,15 +93,118 @@ explored singularly, but only some examples are reported below
 
 \subsection{Subject-dependent experiment with Sequential Features Selection}
 \label{sec:appendix_A3.1}
+\begin{table}[h!]
+  \caption{Manually tuned hyper-paramters for MLP.}
+  \label{tbl:mlp_initial_parameters}
+  \includegraphics[width=\linewidth]{img/appendix/mlp_initial_parameters.png}
+\end{table}
 
-\subsection{Subject-dependent experiment with Top5 features}
+\begin{table}[h!]
+  \caption{Manually tuned hyper-paramters for SVM.}
+  \label{tbl:svm_initial_parameters}
+  \includegraphics[width=\linewidth]{img/appendix/svm_initial_parameters.png}
+\end{table}
+
+\begin{table}[h!]
+  \caption{Average cross-validated accuracy for each classifier and listening condition using SFS.}
+  \label{tbl:sfs_cv_experiment}
+  \includegraphics[width=\linewidth]{img/appendix/sfs_cv_experiment.png}
+\end{table}
+
+\begin{table}[h!]
+  \caption{Most frequently selected features using SFS, renamed TOP5 features.}
+  \label{tbl:sfs_features}
+  \includegraphics[width=\linewidth]{img/appendix/sfs_features.png}
+\end{table}
+
+
+\subsection{Subject-dependent experiment with TOP5 features}
 \label{sec:appendix_A3.2}
 
-\subsection{Examples of unbalanced datasets}
-\label{sec:appendix_A3.3}
+\begin{table}[h!]
+  \caption{Average cross-validated accuracy for each classifier and listening condition using TOP5 features.}
+  \label{tbl:top5_cv_experiment}
+  \includegraphics[width=\linewidth]{img/appendix/top5_cv_experiment.png}
+\end{table}
+
+
+\subsection{Example of unbalanced dataset for arousal classification}
+\label{sec:appendix_A3.3.1}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/arousal_unbalanced.png}
+\centering
+\caption{Summary of annotation session for participant s220602. The labels are color coded according to the pre-labelled 
+VA class of each song.}\label{fig:arousal_unbalanced}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/arousal_unbalanced_distribution.png}
+\centering
+\caption{Labels distribution of participant s220602. The LA* classes summed up are ~1/4 of the entire dataset.}\label{fig:arousal_unbalanced_distribution}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/arousal_unbalanced_roc_svm.png}
+\centering
+\caption{Cross-validated ROC curve for participant s220602 for arousal classification using SVM.}\label{fig:arousal_unbalanced_roc_svm}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/arousal_unbalanced_roc_mlp.png}
+\centering
+\caption{Cross-validated ROC curve for participant s220602 for arousal classification using MLP.}\label{fig:arousal_unbalanced_roc_mlp}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/arousal_unbalanced_pca_confusion.png}
+\centering
+\caption{PCA (left) and confusion matrices (right) of s220602 participant with unbalanced labels for emotional arousal 
+classification.}\label{fig:arousal_unbalanced_pca_confusion}
+\end{figure}
+
+\subsection{Example of unbalanced dataset for valence classification}
+\label{sec:appendix_A3.3.2}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/valence_unbalanced.png}
+\centering
+\caption{Summary of annotation session for participant s050704. The labels are color coded according to the pre-labelled 
+VA class of each song.}\label{fig:valence_unbalanced}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/valence_unbalanced_distribution.png}
+\centering
+\caption{Labels distribution of participant s050704. The class HALV is completely missing.}\label{fig:valence_unbalanced_distribution}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/valence_unbalanced_roc_svm.png}
+\centering
+\caption{Cross-validated ROC curve for participant s050704 for valence classification using SVM.}\label{fig:valence_unbalanced_roc_svm}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/valence_unbalanced_roc_mlp.png}
+\centering
+\caption{Cross-validated ROC curve for participant s050704 for valence classification using MLP.}\label{fig:valence_unbalanced_roc_mlp}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/valence_unbalanced_pca_confusion.png}
+\centering
+\caption{PCA (left) and confusion matrices (right) of s050704 participant with unbalanced labels for emotional valence 
+classification.}\label{fig:valence_unbalanced_pca_confusion}
+\end{figure}
 
 \subsection{Subject-independent experiment with Top5 features}
 \label{sec:appendix_A3.4}
+\begin{table}[h!]
+  \caption{ Average cross-validated accuracy for each classifier and listening condition using TOP5 features.}
+  \label{tbl:top5_cv_si_experiment}
+  \includegraphics[width=\linewidth]{img/appendix/top5_cv_si_experiment.png}
+\end{table}
 
 \subsection{Subject-dependent experiment with "Max Accuracy" scoring strategy}
 \label{sec:appendix_A3.5}
@@ -120,5 +225,74 @@ explored singularly, but only some examples are reported below
 \section{Final experiment}
 \label{sec:appendix_A4}
 
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/final_experiment/experiment_test_recap.png}
+\centering
+\caption{Average Test Accuracy and MCC compare against majority class guessing.}\label{fig:experiment_test_recap}
+\end{figure}
 
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/final_experiment/experiment_cv_recap.png}
+\centering
+\caption{Average CV Accuracy and CV MCC compare against majority class guessing.}\label{fig:experiment_cv_recap}
+\end{figure}
 
+\subsection{Ranking of SVM classification performances for arousal classification}
+\label{sec:appendix_A4.1}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/final_experiment/test_acc_mcc_arousal_svm.png}
+\centering
+\caption{Ranking of subject-dependent SVM models performances for arousal classification by Test MCC, descending.}\label{fig:test_acc_mcc_arousal_svm}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/final_experiment/test_cv_acc_mcc_arousal_svm.png}
+\centering
+\caption{Ranking of subject-dependent SVM models performances for arousal classification by CV MCC, descending.}\label{fig:test_cv_acc_mcc_arousal_svm}
+\end{figure}
+
+\subsection{Ranking of MLP classification performances for arousal classification}
+\label{sec:appendix_A4.2}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/final_experiment/test_acc_mcc_arousal_mlp.png}
+\centering
+\caption{Ranking of subject-dependent MLP models performances for arousal classification by Test MCC, descending.}\label{fig:test_acc_mcc_arousal_mlp}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/final_experiment/test_cv_acc_mcc_arousal_mlp.png}
+\centering
+\caption{Ranking of subject-dependent MLP models performances for arousal classification by CV MCC, descending.}\label{fig:test_cv_acc_mcc_arousal_mlp}
+\end{figure}
+
+\subsection{Ranking of SVM classification performances for valence classification}
+\label{sec:appendix_A4.3}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/final_experiment/test_acc_mcc_valence_svm.png}
+\centering
+\caption{Ranking of subject-dependent SVM models performances for valence classification by Test MCC, descending.}\label{fig:test_acc_mcc_valence_svm}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/final_experiment/test_cv_acc_mcc_valence_svm.png}
+\centering
+\caption{Ranking of subject-dependent SVM models performances for valence classification by CV MCC, descending.}\label{fig:test_cv_acc_mcc_valence_svm}
+\end{figure}
+
+\subsection{Ranking of MLP classification performances for valence classification}
+\label{sec:appendix_A4.4}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/final_experiment/test_acc_mcc_valence_mlp.png}
+\centering
+\caption{Ranking of subject-dependent MLP models performances for valence classification by Test MCC, descending.}\label{fig:test_acc_mcc_valence_mlp}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=16cm]{img/appendix/final_experiment/test_cv_acc_mcc_valence_mlp.png}
+\centering
+\caption{Ranking of subject-dependent MLP models performances for valence classification by CV MCC, descending.}\label{fig:test_cv_acc_mcc_valence_mlp}
+\end{figure}
