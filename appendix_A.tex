@@ -45,13 +45,13 @@ The lower average ratings obtained by the joystick and the higher likelihood of 
 \begin{figure}[!htb]
 \includegraphics[width=14cm]{img/appendix/age_distribution.png}
 \centering
-\caption{Usability scores for training in condition A (joystick)}\label{fig:usbility_condition_B}
+\caption{Age distribution of the population that participated in the experiment}\label{fig:age_distribution}
 \end{figure}
 
 \begin{figure}[!htb]
 \includegraphics[width=14cm]{img/appendix/right_hand.png}
 \centering
-\caption{Usability scores for training in condition A (joystick)}\label{fig:usbility_condition_B}
+\caption{Percentages of right-handed and left-handed over the population that participated in the experiment}\label{fig:right_hand}
 \end{figure}
 
 \subsection{Emotion-Music playlist}
@@ -147,7 +147,7 @@ For this experiment, the average TOP5 features selected using \ac{SFS} were appl
 
 \FloatBarrier
 \subsection{Example of unbalanced dataset for arousal classification}
-\label{sec:appendix_A3.3.1}
+\label{sec:appendix_A3.3}
 A more insightful study was conducted on participants with suspiciously high Test accuracy and low CV accuracy to identify the causes. Here is reported an example from a participant with unbalanced arousal labels. First, the labelling behaviour during experimental trials is reported in figure \ref{fig:arousal_unbalanced}, then the total distribution of \ac{VA} classes is reported in figure \ref{fig:arousal_unbalanced_distribution}.
 
 \begin{figure}[!htb]
@@ -188,7 +188,7 @@ classification.}\label{fig:arousal_unbalanced_pca_confusion}
 \end{figure}
 \FloatBarrier
 \subsection{Example of unbalanced dataset for valence classification}
-\label{sec:appendix_A3.3.2}
+\label{sec:appendix_A3.4}
 A more insightful study was conducted on participants with suspiciously high Test accuracy and low CV accuracy to identify the causes. Here is reported an example from a participant with unbalanced valence labels. First, the labelling behaviour during experimental trials is reported in figure \ref{fig:valence_unbalanced}, then the total distribution of \ac{VA} classes is reported in figure \ref{fig:valence_unbalanced_distribution}.
 
 \begin{figure}[!htb]
@@ -230,7 +230,7 @@ classification.}\label{fig:valence_unbalanced_pca_confusion}
 \FloatBarrier
 
 \subsection{Subject-independent experiment with Top5 features}
-\label{sec:appendix_A3.4}
+\label{sec:appendix_A3.5}
 Since it was impossible to apply \ac{SFS} to the entire dataset for subject-independent classification without days of computational time, for this experiment TOP5 features previously identified were used. The poor average results (see table \ref{tbl:top5_cv_si_experiment}) obtained pushed to focus this research on subject-dependent strategy. Another subject-independent experiment was conducted using \ac{PCA} on a sub-group of participants with balanced datasets, but the results were far below expectations and have not been saved for reporting.
 
 \begin{table}[h!]
@@ -241,7 +241,7 @@ Since it was impossible to apply \ac{SFS} to the entire dataset for subject-inde
 \FloatBarrier
 
 \subsection{Subject-dependent experiment with "Max Accuracy" scoring strategy}
-\label{sec:appendix_A3.5}
+\label{sec:appendix_A3.6}
 Tables \ref{tbl:max_acc_arousal_results} and \ref{tbl:max_acc_valence_results} report the results for arousal and valence subject-dependent classification respectively with a scoring strategy that optimizes hyperparameters to maximize "accuracy" using GridSearch. While average accuracy and CV accuracy scores are higher, the number of overfitting and underfitting models that were generated, especially for \ac{SVM} classifier is also higher. This approach for GridSearch optimization was discarded in the final experiment in favor of maximising \ac{MCC} scores instead.
 \begin{table}[h!]
   \caption{Arousal classification results using "accuracy" as scoring parameter for GridSearch. Learning models are highlighted in blue, over-fitted and under-fitted models are highlighted in yellow and orange, respectively.}
