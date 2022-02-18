@@ -58,7 +58,7 @@ During the experimental session, participants were presented a main task during 
 So, during each trial, the participants would listen to two different songs, rate them and only annotate during the \ac{EO} condition (see Fig. \ref{fig_experimental_trial}). 
 
 \begin{figure}[h!]
-\includegraphics[width=12cm]{img/methods/experimental_trial.png}
+\includegraphics[width=16cm]{img/methods/experimental_trial.png}
 \centering
 \caption{Diagram of an experimental trial starting with EO listening condition.} \label{fig_experimental_trial}
 \end{figure}
@@ -86,9 +86,9 @@ To record \ac{EEG} signals from subjects the standard Melomind (Fig. \ref{fig_me
 The Empatica E4 was connected to an Android tablet running the Empatica application, so the researcher could monitor in real-time the data collection. The \ac{EA} app was entirely developed as a set of automated routines in Psychopy, including trainings for the task, synchronization of the triggers with each experimental event and instructions for the users. The timers of each routine were calibrated during the pilot to allow even slower readers to follow up. 
 
 \begin{figure}[h!]
-\includegraphics[width=12cm]{img/methods/experimental_setup.png}
+\includegraphics[width=15cm]{img/methods/experimental_setup.png}
 \centering
-\caption{Experimental setup with Melomind, Empatica E4 and GoProH7. The EA app is running on the monitor, while a participant is annotating emotions using the mouse (on the left) and then following instructions for the next task (on the right).} \label{fig_experimental_setup}
+\caption{Experimental setup with Melomind, Empatica E4 and GoProH7. The EA app is running on the monitor, while the participant is annotating emotions using the mouse (on the left) and then keeping his eyes closed as instructed in the following task (on the right).} \label{fig_experimental_setup}
 \end{figure}
 
 The participants could interact with the experimental application through an external monitor connected to the researcher’s laptop and an agnostic mouse, although all participants decided to use the right hand. Finally, all the sessions were recorded with a GoPro Hero 7 to monitor accidental events and eventually support the emotion recognition task through facial expressions in a later study. An example of setup for the experiment can be see in Fig. \ref{fig_experimental_setup}. 
@@ -174,7 +174,6 @@ The scale and interpretation of frequency-band-specific power becomes the change
 \item 	Normalization computed in respect to a pre-trial baseline enables to disentangle time-frequency dynamics from background or task-unrelated dynamics
 \item 	All power results are in a common and easily numerically interpretable metrics
 \item 	Parametric statistical analysis is appropriated to use (for baseline-normalized power data normally distributed) and quantitative group-level analyses and integration with other data (behavioral performance, questionnaires) is facilitated. 
-\item 
 \end{itemize}
 The features extracted include the neuromarkers described in Chapter \ref{chap:background} and additional properties of the power spectrum that could strengthen the models’ ability to discriminate emotional dimensions. It was decided in a later stage to use these properties of the raw signal because they could be conveniently extracted using the \ac{SPT} and potentially make up for information lost during the computation of the neuromarkers.
 For each 5s time window the following measurements were computed and stored, for a total of 40 features among the two channels to be used in classification:
