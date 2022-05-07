@@ -6,4 +6,4 @@ using Melomind, a wearable neural interface manufactured by myBrainTechnologies.
 machine learning algorithms in the form of a classification task of the emotional
 dimensions of valence and arousal.
 
-[Read more...](Music_Emotion__Towards_automated_real_time_recognition_of_affective_states_with_a_wearable_Brain_Computer_Interface.pdf)
+[Read more...](https://drive.google.com/file/d/1_mDoYk-ZotFWqijxp46Omp6hSfjMEnBL/view?usp=sharing)
